@@ -91,6 +91,9 @@ $(function(){initNavTree('position__control_8h.html','',''); });
   <div class="headertitle"><div class="title">position_control.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Position Control component for controlling movement.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &quot;esp_err.h&quot;</code><br />
 </div>
@@ -111,7 +114,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0e444fe8dbab6a2c0aa56c7cfd854732" id="r_a0e444fe8dbab6a2c0aa56c7cfd854732"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e444fe8dbab6a2c0aa56c7cfd854732">position_control_is_target_reached</a> (void)</td></tr>
 <tr class="memdesc:a0e444fe8dbab6a2c0aa56c7cfd854732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the current target position has been reached within tolerance.  <br /></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Position Control component for controlling movement. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a75c7333e3ffc7bc68317ec1b2b932e18" name="a75c7333e3ffc7bc68317ec1b2b932e18"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a75c7333e3ffc7bc68317ec1b2b932e18">&#9670;&#160;</a></span>position_control_hold_position()</h2>
 
@@ -128,7 +133,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Stop the current movement and actively hold the current position. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -148,7 +156,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the position control component. Creates and starts the periodic timer for the position control loop. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if timer creation fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -194,7 +206,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -220,7 +235,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -251,7 +269,11 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success, ESP_ERR_INVALID_ARG if the requested speed is too high for the motor. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if the requested speed is too high for the motor. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

@@ -91,6 +91,9 @@ $(function(){initNavTree('main__fsm_8h.html','',''); });
   <div class="headertitle"><div class="title">main_fsm.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Main Finite State Machine component definition.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;esp_err.h&quot;</code><br />
 </div>
 <p><a href="main__fsm_8h_source.html">Go to the source code of this file.</a></p>
@@ -99,12 +102,14 @@ $(function(){initNavTree('main__fsm_8h.html','',''); });
 Functions</h2></td></tr>
 <tr class="memitem:abebccd610436f8fdf94ccace29413268" id="r_abebccd610436f8fdf94ccace29413268"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abebccd610436f8fdf94ccace29413268">main_fsm_init</a> (void)</td></tr>
 <tr class="memdesc:abebccd610436f8fdf94ccace29413268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Main Finite State Machine (FSM) component. Creates and starts the main FSM task which polls inputs and controls the system state.  <br /></td></tr>
-<tr class="memitem:af716dfd93120c4a58b93bd67396de3e7" id="r_af716dfd93120c4a58b93bd67396de3e7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af716dfd93120c4a58b93bd67396de3e7">main_fsm_get_state_string</a> ()</td></tr>
-<tr class="memdesc:af716dfd93120c4a58b93bd67396de3e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string representation of the given FSM state.  <br /></td></tr>
+<tr class="memitem:a5790c7e85ce3e671ba3c98b319587a2b" id="r_a5790c7e85ce3e671ba3c98b319587a2b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5790c7e85ce3e671ba3c98b319587a2b">main_fsm_get_state_string</a> (void)</td></tr>
+<tr class="memdesc:a5790c7e85ce3e671ba3c98b319587a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string representation of the current FSM state.  <br /></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="af716dfd93120c4a58b93bd67396de3e7" name="af716dfd93120c4a58b93bd67396de3e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af716dfd93120c4a58b93bd67396de3e7">&#9670;&#160;</a></span>main_fsm_get_state_string()</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Main Finite State Machine component definition. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a5790c7e85ce3e671ba3c98b319587a2b" name="a5790c7e85ce3e671ba3c98b319587a2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5790c7e85ce3e671ba3c98b319587a2b">&#9670;&#160;</a></span>main_fsm_get_state_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -112,19 +117,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">const char * main_fsm_get_state_string </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get a string representation of the given FSM state. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">state</td><td>The state to convert to a string. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Get a string representation of the current FSM state. </p>
 <dl class="section return"><dt>Returns</dt><dd>const char* String representation of the state. </dd></dl>
 
 </div>
@@ -145,7 +144,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the Main Finite State Machine (FSM) component. Creates and starts the main FSM task which polls inputs and controls the system state. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Spawns a FreeRTOS task handling the state transitions. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if task creation fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

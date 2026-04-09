@@ -1,3 +1,7 @@
+/**
+ * @file bdc_motor_driver.h
+ * @brief Brushed DC Motor Driver component definition.
+ */
 #pragma once
 
 #include <stdint.h>
@@ -9,7 +13,9 @@
  *        Sets up MCPWM, PCNT (Encoder), PID Controller, and the control loop timer.
  *        If CONFIG_BDC_MOTOR_SERIAL_STUDIO_DEBUG is enabled, starts a debug task that prints the current pulse count for Serial Studio.
  *
- * @return esp_err_t ESP_OK on success.
+ * @return esp_err_t
+ *         - ESP_OK on success
+ *         - ESP_FAIL if initialization fails
  */
 esp_err_t bdc_motor_driver_init(void);
 
@@ -19,7 +25,8 @@ esp_err_t bdc_motor_driver_init(void);
  *
  * @param rps Target speed in Revolutions Per Second (RPS).
  *            Positive values for forward, negative for reverse.
- * @return esp_err_t ESP_OK on success.
+ * @return esp_err_t
+ *         - ESP_OK on success
  */
 esp_err_t bdc_driver_set_pid_speed(float rps);
 
@@ -29,7 +36,8 @@ esp_err_t bdc_driver_set_pid_speed(float rps);
  *
  * @param duty_cycle Duty cycle between -1.0 (Full Reverse) and 1.0 (Full Forward).
  *                   Values outside this range are clamped.
- * @return esp_err_t ESP_OK on success.
+ * @return esp_err_t
+ *         - ESP_OK on success
  */
 esp_err_t bdc_driver_set_pwm(float duty_cycle);
 

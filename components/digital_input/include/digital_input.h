@@ -1,3 +1,7 @@
+/**
+ * @file digital_input.h
+ * @brief Digital Input handling component.
+ */
 #pragma once
 
 #include <stdbool.h>
@@ -19,7 +23,10 @@ typedef struct
 /**
  * @brief Initialize all digital inputs, ISRs, and the processing task.
  *
- * @return esp_err_t ESP_OK on success.
+ * @note This configures GPIO pins and may install an ISR service.
+ * @return esp_err_t
+ *         - ESP_OK on success
+ *         - ESP_FAIL if initialization fails
  */
 esp_err_t digital_input_init(void);
 

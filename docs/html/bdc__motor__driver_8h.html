@@ -91,6 +91,9 @@ $(function(){initNavTree('bdc__motor__driver_8h.html','',''); });
   <div class="headertitle"><div class="title">bdc_motor_driver.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Brushed DC Motor Driver component definition.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &quot;esp_err.h&quot;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
@@ -114,7 +117,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a53e935357968e0a0b8cd5b06694de664" id="r_a53e935357968e0a0b8cd5b06694de664"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53e935357968e0a0b8cd5b06694de664">bdc_driver_get_report_pulses</a> (void)</td></tr>
 <tr class="memdesc:a53e935357968e0a0b8cd5b06694de664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of pulses counted in the last PID loop iteration. This represents the change in pulse count since the last PID loop callback.  <br /></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Brushed DC Motor Driver component definition. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a6f2970498491a4cffa6a66966dd7fd10" name="a6f2970498491a4cffa6a66966dd7fd10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f2970498491a4cffa6a66966dd7fd10">&#9670;&#160;</a></span>bdc_driver_get_pulse_count()</h2>
 
@@ -217,7 +222,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -243,7 +251,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -263,7 +274,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the BDC motor driver. Sets up MCPWM, PCNT (Encoder), PID Controller, and the control loop timer. If CONFIG_BDC_MOTOR_SERIAL_STUDIO_DEBUG is enabled, starts a debug task that prints the current pulse count for Serial Studio. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if initialization fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

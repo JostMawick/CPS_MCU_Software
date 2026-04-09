@@ -21,10 +21,9 @@ var searchData=
   ['bdc_5fmotor_5fdriver_2eh_18',['bdc_motor_driver.h',['../bdc__motor__driver_8h.html',1,'']]],
   ['bdc_5fmotor_5fdriver_5finit_19',['bdc_motor_driver_init',['../bdc__motor__driver_8c.html#ae48fab013595304342ad8794175c2d42',1,'bdc_motor_driver_init(void):&#160;bdc_motor_driver.c'],['../bdc__motor__driver_8h.html#ae48fab013595304342ad8794175c2d42',1,'bdc_motor_driver_init(void):&#160;bdc_motor_driver.c']]],
   ['bdc_5fpid_5floop_5fperiod_5fms_20',['BDC_PID_LOOP_PERIOD_MS',['../bdc__motor__driver_8c.html#a5044e25691aac84fc42ce93eab92a5b7',1,'bdc_motor_driver.c']]],
-  ['bottom_5fposition_5fmm_21',['BOTTOM_POSITION_MM',['../main__fsm_8c.html#a6c84059115b1e0c7474cb680133afe77',1,'main_fsm.c']]],
-  ['brushed_20dc_20motor_20example_22',['MCPWM Brushed DC Motor Example',['../dir_0d3f60270fc3e7d626e3f33c3958c44a.html#autotoc_md0',1,'']]],
-  ['btn_5fdown_23',['btn_down',['../structdigital__inputs__t.html#a376cc38470e355f05cff66e713caa5c2',1,'digital_inputs_t']]],
-  ['btn_5fstop_24',['btn_stop',['../structdigital__inputs__t.html#a532ca2a65139aebf3524c9f15d4750a5',1,'digital_inputs_t']]],
-  ['btn_5fup_25',['btn_up',['../structdigital__inputs__t.html#a355511c5d15e5a5f767f4cbbaada9a1d',1,'digital_inputs_t']]],
-  ['build_20and_20flash_26',['Build and Flash',['../dir_0d3f60270fc3e7d626e3f33c3958c44a.html#autotoc_md3',1,'']]]
+  ['brushed_20dc_20motor_20example_21',['MCPWM Brushed DC Motor Example',['../dir_0d3f60270fc3e7d626e3f33c3958c44a.html#autotoc_md0',1,'']]],
+  ['btn_5fdown_22',['btn_down',['../structdigital__inputs__t.html#a376cc38470e355f05cff66e713caa5c2',1,'digital_inputs_t']]],
+  ['btn_5fstop_23',['btn_stop',['../structdigital__inputs__t.html#a532ca2a65139aebf3524c9f15d4750a5',1,'digital_inputs_t']]],
+  ['btn_5fup_24',['btn_up',['../structdigital__inputs__t.html#a355511c5d15e5a5f767f4cbbaada9a1d',1,'digital_inputs_t']]],
+  ['build_20and_20flash_25',['Build and Flash',['../dir_0d3f60270fc3e7d626e3f33c3958c44a.html#autotoc_md3',1,'']]]
 ];

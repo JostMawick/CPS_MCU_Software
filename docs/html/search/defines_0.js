@@ -11,6 +11,5 @@ var searchData=
   ['bdc_5fmcpwm_5fgpio_5fa_8',['BDC_MCPWM_GPIO_A',['../bdc__motor__driver_8c.html#a92be64563eabecb81d5f239ccb74ac1a',1,'bdc_motor_driver.c']]],
   ['bdc_5fmcpwm_5fgpio_5fb_9',['BDC_MCPWM_GPIO_B',['../bdc__motor__driver_8c.html#a14f57b1c9614983306411f8a687ba1d4',1,'bdc_motor_driver.c']]],
   ['bdc_5fmcpwm_5ftimer_5fresolution_5fhz_10',['BDC_MCPWM_TIMER_RESOLUTION_HZ',['../bdc__motor__driver_8c.html#a987cb3041b362c2d40b4a42bffb80c22',1,'bdc_motor_driver.c']]],
-  ['bdc_5fpid_5floop_5fperiod_5fms_11',['BDC_PID_LOOP_PERIOD_MS',['../bdc__motor__driver_8c.html#a5044e25691aac84fc42ce93eab92a5b7',1,'bdc_motor_driver.c']]],
-  ['bottom_5fposition_5fmm_12',['BOTTOM_POSITION_MM',['../main__fsm_8c.html#a6c84059115b1e0c7474cb680133afe77',1,'main_fsm.c']]]
+  ['bdc_5fpid_5floop_5fperiod_5fms_11',['BDC_PID_LOOP_PERIOD_MS',['../bdc__motor__driver_8c.html#a5044e25691aac84fc42ce93eab92a5b7',1,'bdc_motor_driver.c']]]
 ];

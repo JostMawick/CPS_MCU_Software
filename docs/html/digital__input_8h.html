@@ -91,6 +91,9 @@ $(function(){initNavTree('digital__input_8h.html','',''); });
   <div class="headertitle"><div class="title">digital_input.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Digital Input handling component.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;esp_err.h&quot;</code><br />
 </div>
@@ -108,7 +111,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ab15a693d4da527bc733200beb762ed40" id="r_ab15a693d4da527bc733200beb762ed40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structdigital__inputs__t.html">digital_inputs_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab15a693d4da527bc733200beb762ed40">digital_input_get_data</a> (void)</td></tr>
 <tr class="memdesc:ab15a693d4da527bc733200beb762ed40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current snapshot of all digital input states. Thread-safe structure copy.  <br /></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Digital Input handling component. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="ab15a693d4da527bc733200beb762ed40" name="ab15a693d4da527bc733200beb762ed40"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab15a693d4da527bc733200beb762ed40">&#9670;&#160;</a></span>digital_input_get_data()</h2>
 
@@ -145,7 +150,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize all digital inputs, ISRs, and the processing task. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This configures GPIO pins and may install an ISR service. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if initialization fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

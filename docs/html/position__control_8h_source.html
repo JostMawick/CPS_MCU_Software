@@ -91,22 +91,23 @@ $(function(){initNavTree('position__control_8h_source.html','',''); });
   <div class="headertitle"><div class="title">position_control.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="position__control_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a0592377acb3aa9f42acbed6a3a4d1f2e">position_control_init</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a856d049afffcbba5f8d7a26750341692">position_control_set_revolutions</a>(<span class="keywordtype">float</span> revolutions);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#aa106e9b1aba835dd359c76688b008293">position_control_set_position_mm</a>(<span class="keywordtype">float</span> position_mm);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a8f5cf82549f47d6d1cf8f14365278077">position_control_set_trajectory_mm</a>(<span class="keywordtype">float</span> position_mm, <span class="keywordtype">float</span> duration_sec);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a75c7333e3ffc7bc68317ec1b2b932e18">position_control_hold_position</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keywordtype">bool</span> <a class="code hl_function" href="position__control_8h.html#a0e444fe8dbab6a2c0aa56c7cfd854732">position_control_is_target_reached</a>(<span class="keywordtype">void</span>);</div>
+<a href="position__control_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;esp_err.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a0592377acb3aa9f42acbed6a3a4d1f2e">position_control_init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a856d049afffcbba5f8d7a26750341692">position_control_set_revolutions</a>(<span class="keywordtype">float</span> revolutions);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#aa106e9b1aba835dd359c76688b008293">position_control_set_position_mm</a>(<span class="keywordtype">float</span> position_mm);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a8f5cf82549f47d6d1cf8f14365278077">position_control_set_trajectory_mm</a>(<span class="keywordtype">float</span> position_mm, <span class="keywordtype">float</span> duration_sec);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>esp_err_t <a class="code hl_function" href="position__control_8h.html#a75c7333e3ffc7bc68317ec1b2b932e18">position_control_hold_position</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keywordtype">bool</span> <a class="code hl_function" href="position__control_8h.html#a0e444fe8dbab6a2c0aa56c7cfd854732">position_control_is_target_reached</a>(<span class="keywordtype">void</span>);</div>
 <div class="ttc" id="aposition__control_8h_html_a0592377acb3aa9f42acbed6a3a4d1f2e"><div class="ttname"><a href="position__control_8h.html#a0592377acb3aa9f42acbed6a3a4d1f2e">position_control_init</a></div><div class="ttdeci">esp_err_t position_control_init(void)</div><div class="ttdoc">Initialize the position control component. Creates and starts the periodic timer for the position con...</div><div class="ttdef"><b>Definition</b> position_control.c:45</div></div>
 <div class="ttc" id="aposition__control_8h_html_a0e444fe8dbab6a2c0aa56c7cfd854732"><div class="ttname"><a href="position__control_8h.html#a0e444fe8dbab6a2c0aa56c7cfd854732">position_control_is_target_reached</a></div><div class="ttdeci">bool position_control_is_target_reached(void)</div><div class="ttdoc">Check if the current target position has been reached within tolerance.</div><div class="ttdef"><b>Definition</b> position_control.c:246</div></div>
 <div class="ttc" id="aposition__control_8h_html_a75c7333e3ffc7bc68317ec1b2b932e18"><div class="ttname"><a href="position__control_8h.html#a75c7333e3ffc7bc68317ec1b2b932e18">position_control_hold_position</a></div><div class="ttdeci">esp_err_t position_control_hold_position(void)</div><div class="ttdoc">Stop the current movement and actively hold the current position.</div><div class="ttdef"><b>Definition</b> position_control.c:233</div></div>

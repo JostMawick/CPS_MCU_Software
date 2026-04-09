@@ -91,6 +91,9 @@ $(function(){initNavTree('led__control_8h.html','',''); });
   <div class="headertitle"><div class="title">led_control.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>LED Control component definition.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;esp_err.h&quot;</code><br />
 </div>
 <p><a href="led__control_8h_source.html">Go to the source code of this file.</a></p>
@@ -111,7 +114,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a7304eaf58f781d87750918c9dea02d2c" id="r_a7304eaf58f781d87750918c9dea02d2c"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7304eaf58f781d87750918c9dea02d2c">led_control_set_mode</a> (<a class="el" href="#a6ad21e6046b97022390d7b38aa87ca7e">led_mode_t</a> mode)</td></tr>
 <tr class="memdesc:a7304eaf58f781d87750918c9dea02d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the LED operating mode.  <br /></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>LED Control component definition. </p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
 <a id="a6ad21e6046b97022390d7b38aa87ca7e" name="a6ad21e6046b97022390d7b38aa87ca7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ad21e6046b97022390d7b38aa87ca7e">&#9670;&#160;</a></span>led_mode_t</h2>
 
@@ -151,7 +156,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the LED control component. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Initializes hardware and spawns the FreeRTOS task handling LED modes. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if initialization fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -177,7 +187,12 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success, ESP_ERR_INVALID_STATE if not initialized, ESP_FAIL if queue is full. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if not initialized</li>
+<li>ESP_FAIL if queue is full </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

@@ -274,7 +274,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Stop the current movement and actively hold the current position. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -294,7 +297,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the position control component. Creates and starts the periodic timer for the position control loop. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if timer creation fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -340,7 +347,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -366,7 +376,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -397,7 +410,11 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success, ESP_ERR_INVALID_ARG if the requested speed is too high for the motor. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if the requested speed is too high for the motor. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

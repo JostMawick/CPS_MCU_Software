@@ -158,7 +158,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the LED control component. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Initializes hardware and spawns the FreeRTOS task handling LED modes. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if initialization fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -184,7 +189,12 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success, ESP_ERR_INVALID_STATE if not initialized, ESP_FAIL if queue is full. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if not initialized</li>
+<li>ESP_FAIL if queue is full </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

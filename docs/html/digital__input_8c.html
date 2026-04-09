@@ -244,7 +244,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize all digital inputs, ISRs, and the processing task. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This configures GPIO pins and may install an ISR service. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if initialization fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

@@ -487,7 +487,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -513,7 +516,10 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -533,7 +539,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the BDC motor driver. Sets up MCPWM, PCNT (Encoder), PID Controller, and the control loop timer. If CONFIG_BDC_MOTOR_SERIAL_STUDIO_DEBUG is enabled, starts a debug task that prints the current pulse count for Serial Studio. </p>
-<dl class="section return"><dt>Returns</dt><dd>esp_err_t ESP_OK on success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>esp_err_t<ul>
+<li>ESP_OK on success</li>
+<li>ESP_FAIL if initialization fails </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
