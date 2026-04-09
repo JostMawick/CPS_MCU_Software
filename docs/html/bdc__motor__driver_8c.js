@@ -1,0 +1,28 @@
+var bdc__motor__driver_8c =
+[
+    [ "motor_control_context_t", "structmotor__control__context__t.html", "structmotor__control__context__t" ],
+    [ "BDC_ENCODER_ENABLE_QUADRATURE", "bdc__motor__driver_8c.html#a1c75519408cff70079bced5ad1a9605c", null ],
+    [ "BDC_ENCODER_GPIO_A", "bdc__motor__driver_8c.html#aed23939ff8fd00800fababb3e4d93b9f", null ],
+    [ "BDC_ENCODER_GPIO_B", "bdc__motor__driver_8c.html#ab157541dcb192d4aaa5d140f6af87ce6", null ],
+    [ "BDC_ENCODER_PCNT_HIGH_LIMIT", "bdc__motor__driver_8c.html#a279324a0354b8f98d644f0ab162e4794", null ],
+    [ "BDC_ENCODER_PCNT_LOW_LIMIT", "bdc__motor__driver_8c.html#a768bd31096f58a2689c06d9b786ffce9", null ],
+    [ "BDC_ENCODER_RESOLUTION", "bdc__motor__driver_8c.html#aac7c52b629d2cbeed37c3768693050a8", null ],
+    [ "BDC_MCPWM_DUTY_TICK_MAX", "bdc__motor__driver_8c.html#a8abd88544e5953381a5244b580fc85c0", null ],
+    [ "BDC_MCPWM_FREQ_HZ", "bdc__motor__driver_8c.html#a8f0feab856a439011ff71dabea59c0ac", null ],
+    [ "BDC_MCPWM_GPIO_A", "bdc__motor__driver_8c.html#a92be64563eabecb81d5f239ccb74ac1a", null ],
+    [ "BDC_MCPWM_GPIO_B", "bdc__motor__driver_8c.html#a14f57b1c9614983306411f8a687ba1d4", null ],
+    [ "BDC_MCPWM_TIMER_RESOLUTION_HZ", "bdc__motor__driver_8c.html#a987cb3041b362c2d40b4a42bffb80c22", null ],
+    [ "BDC_PID_LOOP_PERIOD_MS", "bdc__motor__driver_8c.html#a5044e25691aac84fc42ce93eab92a5b7", null ],
+    [ "PID_KP", "bdc__motor__driver_8c.html#a6b207f9033329febafe1690def5a0dc9", null ],
+    [ "PID_TD", "bdc__motor__driver_8c.html#a59ca45566e64a460241c8c2bad4c6c73", null ],
+    [ "PID_TI", "bdc__motor__driver_8c.html#a9e06881d5dba85a30b23b57d6ce5d830", null ],
+    [ "QUADRATURE_ENCODER_ENABLE", "bdc__motor__driver_8c.html#a92dd0f8a72c6d43af7afafd6b98f4794", null ],
+    [ "SERIAL_STUDIO_DEBUG", "bdc__motor__driver_8c.html#af158ea8c88dae18d3d2afada2d6b3ab0", null ],
+    [ "bdc_driver_get_pulse_count", "bdc__motor__driver_8c.html#a6f2970498491a4cffa6a66966dd7fd10", null ],
+    [ "bdc_driver_get_report_pulses", "bdc__motor__driver_8c.html#a53e935357968e0a0b8cd5b06694de664", null ],
+    [ "bdc_driver_get_revolutions", "bdc__motor__driver_8c.html#a9d0fe864ecb7e4dabf839e3413b1c84c", null ],
+    [ "bdc_driver_get_speed_rps", "bdc__motor__driver_8c.html#aea27359a1a665811380e507029605427", null ],
+    [ "bdc_driver_set_pid_speed", "bdc__motor__driver_8c.html#a3218e4354e7b4695d9d1f7721960886e", null ],
+    [ "bdc_driver_set_pwm", "bdc__motor__driver_8c.html#a14647b39c6122c7455c72dd5d16f4810", null ],
+    [ "bdc_motor_driver_init", "bdc__motor__driver_8c.html#ae48fab013595304342ad8794175c2d42", null ]
+];

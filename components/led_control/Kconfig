@@ -1,0 +1,33 @@
+menu "LED Control Configuration"
+
+    config LED_CONTROL_PIN
+        int "GPIO pin for LED"
+        default 4
+        help
+            GPIO pin number to which the LED is connected.
+
+    config LED_BLINK_INTERVAL_MS
+        int "Fast blink interval in milliseconds"
+        default 500
+        help
+            Time interval for fast LED blinking in milliseconds.
+
+    config LED_BLINK_SLOW_INTERVAL_MS
+        int "Slow blink interval in milliseconds"
+        default 1000
+        help
+            Time interval for slow LED blinking in milliseconds.
+
+    config LED_TASK_PRIORITY
+        int "FreeRTOS task priority"
+        default 5
+        help
+            Priority of the LED control task.
+
+    config LED_TASK_STACK_SIZE
+        int "FreeRTOS task stack size"
+        default 2048
+        help
+            Stack size for the LED control task.
+
+endmenu

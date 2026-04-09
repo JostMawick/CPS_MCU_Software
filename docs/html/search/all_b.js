@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['pcnt_5fencoder_0',['pcnt_encoder',['../structmotor__control__context__t.html#a890ec055a114cc4b26d8dc9c21d2ff15',1,'motor_control_context_t']]],
+  ['pid_5fctrl_1',['pid_ctrl',['../structmotor__control__context__t.html#ae45be6d737c8ed16ab16132f654a2ec6',1,'motor_control_context_t']]],
+  ['pid_5fenabled_2',['pid_enabled',['../structmotor__control__context__t.html#ad4db6f287afec02008fbf39db7948dc2',1,'motor_control_context_t']]],
+  ['pid_5fexpect_5fspeed_5fin_5fticks_3',['pid_expect_speed_in_ticks',['../structmotor__control__context__t.html#ae6fd11568eb816cb42855656fcc249cf',1,'motor_control_context_t']]],
+  ['pid_5fkp_4',['PID_KP',['../bdc__motor__driver_8c.html#a6b207f9033329febafe1690def5a0dc9',1,'bdc_motor_driver.c']]],
+  ['pid_5ftd_5',['PID_TD',['../bdc__motor__driver_8c.html#a59ca45566e64a460241c8c2bad4c6c73',1,'bdc_motor_driver.c']]],
+  ['pid_5fti_6',['PID_TI',['../bdc__motor__driver_8c.html#a9e06881d5dba85a30b23b57d6ce5d830',1,'bdc_motor_driver.c']]],
+  ['pin_7',['pin',['../structisr__event__t.html#a9c2195806976e35ff89c02928dcec388',1,'isr_event_t']]],
+  ['pin_5fbtn_5fdown_8',['PIN_BTN_DOWN',['../digital__input_8c.html#a2769aa1f119ba6c56d2797bafd7a75dc',1,'digital_input.c']]],
+  ['pin_5fbtn_5fstop_9',['PIN_BTN_STOP',['../digital__input_8c.html#ace6f167ce0cb0f0e59e3ce71857b662c',1,'digital_input.c']]],
+  ['pin_5fbtn_5fup_10',['PIN_BTN_UP',['../digital__input_8c.html#a8e7ad5fc211abebc48312e1c9bff8d08',1,'digital_input.c']]],
+  ['pin_5femergency_11',['PIN_EMERGENCY',['../digital__input_8c.html#ae9cc3928ed183c3a7708a09673afb972',1,'digital_input.c']]],
+  ['pin_5flight_5fbarrier_12',['PIN_LIGHT_BARRIER',['../digital__input_8c.html#ab56955c598c9f73bf40261f3c0a8f8a3',1,'digital_input.c']]],
+  ['pos_5fctrl_5fkp_13',['POS_CTRL_KP',['../position__control_8c.html#a74179fe81c9579d1e88d54405711ccdd',1,'position_control.c']]],
+  ['position_5fcontrol_2ec_14',['position_control.c',['../position__control_8c.html',1,'']]],
+  ['position_5fcontrol_2eh_15',['position_control.h',['../position__control_8h.html',1,'']]],
+  ['position_5fcontrol_5fcontext_5ft_16',['position_control_context_t',['../structposition__control__context__t.html',1,'']]],
+  ['position_5fcontrol_5fhold_5fposition_17',['position_control_hold_position',['../position__control_8h.html#a75c7333e3ffc7bc68317ec1b2b932e18',1,'position_control_hold_position(void):&#160;position_control.c'],['../position__control_8c.html#a75c7333e3ffc7bc68317ec1b2b932e18',1,'position_control_hold_position(void):&#160;position_control.c']]],
+  ['position_5fcontrol_5finit_18',['position_control_init',['../position__control_8h.html#a0592377acb3aa9f42acbed6a3a4d1f2e',1,'position_control_init(void):&#160;position_control.c'],['../position__control_8c.html#a0592377acb3aa9f42acbed6a3a4d1f2e',1,'position_control_init(void):&#160;position_control.c']]],
+  ['position_5fcontrol_5fis_5ftarget_5freached_19',['position_control_is_target_reached',['../position__control_8h.html#a0e444fe8dbab6a2c0aa56c7cfd854732',1,'position_control_is_target_reached(void):&#160;position_control.c'],['../position__control_8c.html#a0e444fe8dbab6a2c0aa56c7cfd854732',1,'position_control_is_target_reached(void):&#160;position_control.c']]],
+  ['position_5fcontrol_5fset_5fposition_5fmm_20',['position_control_set_position_mm',['../position__control_8h.html#aa106e9b1aba835dd359c76688b008293',1,'position_control_set_position_mm(float position_mm):&#160;position_control.c'],['../position__control_8c.html#aa106e9b1aba835dd359c76688b008293',1,'position_control_set_position_mm(float position_mm):&#160;position_control.c']]],
+  ['position_5fcontrol_5fset_5frevolutions_21',['position_control_set_revolutions',['../position__control_8h.html#a856d049afffcbba5f8d7a26750341692',1,'position_control_set_revolutions(float revolutions):&#160;position_control.c'],['../position__control_8c.html#a856d049afffcbba5f8d7a26750341692',1,'position_control_set_revolutions(float revolutions):&#160;position_control.c']]],
+  ['position_5fcontrol_5fset_5ftrajectory_5fmm_22',['position_control_set_trajectory_mm',['../position__control_8h.html#a8f5cf82549f47d6d1cf8f14365278077',1,'position_control_set_trajectory_mm(float position_mm, float duration_sec):&#160;position_control.c'],['../position__control_8c.html#a8f5cf82549f47d6d1cf8f14365278077',1,'position_control_set_trajectory_mm(float position_mm, float duration_sec):&#160;position_control.c']]],
+  ['pulley_5fradius_5fmm_23',['PULLEY_RADIUS_MM',['../position__control_8c.html#a2f7a0a3390053d8a185b2e9ec7efa3c3',1,'position_control.c']]]
+];

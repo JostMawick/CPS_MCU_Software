@@ -1,0 +1,57 @@
+menu "Position Control Configuration"
+
+    config POS_CTRL_PULLEY_RADIUS_MM
+        int "Initial Pulley/Spool Radius (mm)"
+        default 10
+        help
+            The initial radius of the winding/spool or pulley.
+            This value is used as the base for calculating the circumference and thereby the millimeters per revolution.
+
+    config POS_CTRL_LAYER_THICKNESS_MM
+        int "Layer/Cord Thickness (mm)"
+        default 2
+        help
+            The thickness of the cord or material that wraps around the pulley.
+            Useful for future calculations where the effective diameter increases with each revolution.
+
+    config POS_CTRL_MAX_POSITION_MM
+        int "Maximum Position Limit (Software Endstop) (mm)"
+        default 2000
+        help
+            The maximum distance the axis/curtain is allowed to travel. Serves as a software limit
+            to prevent the motor from tearing the mechanical structure.
+
+    config POS_CTRL_MIN_POSITION_MM
+        int "Minimum Position Limit (Software Endstop) (mm)"
+        default 0
+        help
+            The minimum distance the axis/curtain is allowed to travel. Serves as a software limit
+            to prevent the motor from driving backwards into the structure.
+
+    config POS_CTRL_MAX_REVOLUTIONS
+        int "Maximum Motor Revolutions Limit"
+        default 1000
+        help
+            The maximum number of revolutions the motor is allowed to turn.
+            Serves as a software limit for pure rotational commands.
+
+    config POS_CTRL_MIN_REVOLUTIONS
+        int "Minimum Motor Revolutions Limit"
+        default 0
+        help
+            The minimum number of revolutions the motor is allowed to turn.
+
+    config POS_CTRL_TOLERANCE_MM
+        int "Position Target Deadband/Tolerance (mm)"
+        default 5
+        help
+            The acceptable error margin to consider the target position reached. 
+            This prevents the motor from continuously "hunting" or jittering around the target.
+
+    config POS_CTRL_LOOP_PERIOD_MS
+        int "Position Control Loop Period (ms)"
+        default 100
+        help
+            The execution period of the position control task or timer loop.
+
+endmenu

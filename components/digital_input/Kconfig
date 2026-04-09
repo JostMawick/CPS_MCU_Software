@@ -1,0 +1,50 @@
+menu "Digital Input Configuration"
+
+    config DIGITAL_INPUT_PIN_BTN_UP
+        int "GPIO Pin for Button UP"
+        default 19
+        help
+            GPIO pin number connected to the UP button (User Input).
+
+    config DIGITAL_INPUT_PIN_BTN_DOWN
+        int "GPIO Pin for Button DOWN"
+        default 18
+        help
+            GPIO pin number connected to the DOWN button (User Input).
+
+    config DIGITAL_INPUT_PIN_BTN_STOP
+        int "GPIO Pin for Button STOP"
+        default 21
+        help
+            GPIO pin number connected to the STOP button (User Input).
+
+    config DIGITAL_INPUT_PIN_LIGHT_BARRIER
+        int "GPIO Pin for Light Barrier"
+        default 22
+        help
+            GPIO pin number connected to the light barrier sensor output.
+
+    config DIGITAL_INPUT_PIN_EMERGENCY
+        int "GPIO Pin for Emergency Switch Monitor"
+        default 5
+        help
+            GPIO pin number monitoring the state of the hardware emergency stop circuit.
+            NOTE: This is for software status only, not safety cutoff!
+
+    config DIGITAL_INPUT_TASK_PRIORITY
+        int "Digital Input Task Priority"
+        default 10
+        range 1 24
+        help
+            FreeRTOS priority for the input processing task.
+            Higher number = higher priority. 
+            Should be high enough to process inputs quickly, but not starve communication tasks.
+
+    config DIGITAL_INPUT_TASK_STACK_SIZE
+        int "Digital Input Task Stack Size"
+        default 2048
+        help
+            Stack size in bytes for the input processing task.
+            Adjust if you add heavy processing or large stack variables.
+
+endmenu

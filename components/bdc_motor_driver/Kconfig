@@ -1,0 +1,69 @@
+menu "BDC Motor Driver Configuration"
+
+    config BDC_MOTOR_PWM_GPIO_A
+        int "PWM A GPIO"
+        default 13
+        help
+            GPIO number for PWM A output.
+
+    config BDC_MOTOR_PWM_GPIO_B
+        int "PWM B GPIO"
+        default 15
+        help
+            GPIO number for PWM B output.
+
+    config BDC_MOTOR_PWM_FREQ_HZ
+        int "PWM Frequency (Hz)"
+        default 25000
+        help
+            PWM frequency in Hz.
+
+    config BDC_MOTOR_ENCODER_GPIO_A
+        int "Encoder A GPIO"
+        default 14
+        help
+            GPIO number for Encoder phase A.
+
+    config BDC_MOTOR_ENCODER_GPIO_B
+        int "Encoder B GPIO"
+        default 27
+        help
+            GPIO number for Encoder phase B.
+
+    config BDC_MOTOR_PCNT_HIGH_LIMIT
+        int "Encoder PCNT High Limit"
+        default 1000
+        help
+            Maximum count value for the pulse counter before overflow/wrapping.
+
+    config BDC_MOTOR_PCNT_LOW_LIMIT
+        int "Encoder PCNT Low Limit"
+        default -1000
+        help
+            Minimum count value for the pulse counter before underflow/wrapping.
+
+    config BDC_MOTOR_ENCODER_RESOLUTION
+        int "Encoder Resolution (PPR)"
+        default 2400
+        help
+            The number of pulses per revolution of the encoder.
+
+    config BDC_MOTOR_PID_LOOP_PERIOD_MS
+        int "PID Loop Period (ms)"
+        default 10
+        help
+            Period in milliseconds for the PID control loop calculation.
+
+    config BDC_MOTOR_ENABLE_QUADRATURE_ENCODER
+        bool "Enable Quadrature Encoder"
+        default "y"
+        help
+            Enable quadrature encoder mode. If disabled, single channel counter mode is used.
+
+    config BDC_MOTOR_SERIAL_STUDIO_DEBUG
+        bool "Enable log for Serial Studio"
+        default "n"
+        help
+            Enable this option to print debug logs that can be parsed by Serial Studio.
+
+endmenu
