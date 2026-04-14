@@ -27,8 +27,10 @@ This project targets a **NodeMCU ESP32-S** development board. Currently, no exte
 | Inductive Sensor | `TBD`             | Detects metallic objects         |
 | Light Barrier    | `TBD`             | Conveyor belt limits / safety    |
 | User Buttons     | `TBD`             | Up, Down, Stop controls          |
+| Servo PWM        | `TBD`             | PWM signal for servo control     |
 
 _(Note: The exact GPIO assignment is subject to change as hardware integration progresses.)_
+It can always be changed later in the Kconfig.
 
 ## Architecture and Dependencies
 
