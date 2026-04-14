@@ -1,0 +1,35 @@
+menu "Servo Control Configuration"
+
+    config SERVO_PULSE_GPIO
+        int "GPIO Pin for Servo PWM"
+        default 0
+        help
+            GPIO pin number connected to the PWM signal line of the servo.
+
+    config SERVO_MIN_PULSEWIDTH_US
+        int "Minimum Pulse Width (us)"
+        default 500
+        help
+            Minimum pulse width in microseconds (typically maps to minimum angle).
+            Consult your servo datasheet.
+
+    config SERVO_MAX_PULSEWIDTH_US
+        int "Maximum Pulse Width (us)"
+        default 2500
+        help
+            Maximum pulse width in microseconds (typically maps to maximum angle).
+            Consult your servo datasheet.
+
+    config SERVO_MIN_DEGREE
+        int "Minimum Angle (Degree)"
+        default -90
+        help
+            Minimum angle of the servo.
+
+    config SERVO_MAX_DEGREE
+        int "Maximum Angle (Degree)"
+        default 90
+        help
+            Maximum angle of the servo.
+
+endmenu
