@@ -30,6 +30,7 @@ typedef struct
 // --- Private Globals ---
 static digital_inputs_t s_input_values = {0};
 static QueueHandle_t s_input_queue = NULL;
+static QueueHandle_t s_input_queue_debounced = NULL;
 static SemaphoreHandle_t s_input_mutex = NULL;
 
 static int64_t last_isr_time[GPIO_NUM_MAX] = {0};
@@ -62,7 +63,7 @@ static void digital_input_task(void *arg)
             last_isr_time[evt.pin] = now;
 
             // 2. Wait a little bit to let the bouncing settle physically
-            vTaskDelay(pdMS_TO_TICKS(10)); 
+            vTaskDelay(pdMS_TO_TICKS(10));
 
             // 3. Read the ACTUAL current hardware state
             int current_level = gpio_get_level(evt.pin);
@@ -73,40 +74,51 @@ static void digital_input_task(void *arg)
                 switch (evt.pin)
                 {
                 case PIN_BTN_UP:
-                    if (s_input_values.btn_up == !current_level) break; // Check against ACTUAL level
+                    if (s_input_values.btn_up == !current_level)
+                        break; // Check against ACTUAL level
                     s_input_values.btn_up = !current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
                     ESP_LOGI(TAG, "BTN UP: %d", s_input_values.btn_up);
                     break;
 
                 case PIN_BTN_DOWN:
-                    if (s_input_values.btn_down == !current_level) break;
+                    if (s_input_values.btn_down == !current_level)
+                        break;
                     s_input_values.btn_down = !current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
                     ESP_LOGI(TAG, "BTN DOWN: %d", s_input_values.btn_down);
                     break;
 
                 case PIN_BTN_STOP:
-                    if (s_input_values.btn_stop == !current_level) break;
+                    if (s_input_values.btn_stop == !current_level)
+                        break;
                     s_input_values.btn_stop = !current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
                     ESP_LOGI(TAG, "BTN STOP: %d", s_input_values.btn_stop);
                     break;
 
                 case PIN_LIGHT_BARRIER:
                     // Assuming Light Barrier is also Active Low (Pull-Up)
-                    if (s_input_values.light_barrier == !current_level) break;
+                    if (s_input_values.light_barrier == !current_level)
+                        break;
                     s_input_values.light_barrier = !current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
                     ESP_LOGI(TAG, "LIGHT BARRIER: %d", s_input_values.light_barrier);
                     break;
 
                 case PIN_EMERGENCY:
                     // Monitoring only
-                    if (s_input_values.emergency_switch_state == !current_level) break;
+                    if (s_input_values.emergency_switch_state == !current_level)
+                        break;
                     s_input_values.emergency_switch_state = !current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
                     ESP_LOGW(TAG, "EMERGENCY SWITCH STATE: %d", s_input_values.emergency_switch_state);
                     break;
 
                 default:
                     break;
                 }
+
                 xSemaphoreGive(s_input_mutex);
             }
         }
@@ -120,6 +132,10 @@ esp_err_t digital_input_init(void)
     // 1. Create Synchronization Objects
     s_input_queue = xQueueCreate(10, sizeof(isr_event_t));
     if (s_input_queue == NULL)
+        return ESP_ERR_NO_MEM;
+
+    s_input_queue_debounced = xQueueCreate(10, sizeof(digital_inputs_t));
+    if (s_input_queue_debounced == NULL)
         return ESP_ERR_NO_MEM;
 
     s_input_mutex = xSemaphoreCreateMutex();
@@ -184,4 +200,9 @@ digital_inputs_t digital_input_get_data(void)
         }
     }
     return data_copy;
+}
+
+QueueHandle_t digital_input_get_queue(void)
+{
+    return s_input_queue_debounced;
 }

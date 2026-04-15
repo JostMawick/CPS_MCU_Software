@@ -37,3 +37,11 @@ esp_err_t digital_input_init(void);
  * @return digital_inputs_t Copy of the current state.
  */
 digital_inputs_t digital_input_get_data(void);
+
+/**
+ * @brief Get the FreeRTOS queue handle for debounced input events.
+ *        This queue receives updates whenever an input state changes after debouncing.
+ *
+ * @return QueueHandle_t Handle to the input event queue.
+ */
+QueueHandle_t digital_input_get_queue(void);

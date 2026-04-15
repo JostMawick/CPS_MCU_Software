@@ -21,17 +21,41 @@ typedef enum
 } fsm_state_t;
 
 static fsm_state_t current_state = STATE_IDLE;
+static QueueHandle_t input_event_queue = NULL;
+static digital_inputs_t s_digital_inputs;
 
 static void main_fsm_task(void *arg)
 {
     ESP_LOGI(TAG, "Main FSM Task started");
+    input_event_queue = digital_input_get_queue();
 
     while (1)
     {
+        if (xQueueReceive(input_event_queue, &s_digital_inputs, portMAX_DELAY))
+        {
 
-        digital_inputs_t inputs = digital_input_get_data();
+            switch (current_state)
+            {
+            case STATE_IDLE:
+                if (s_digital_inputs.btn_up)
+                    current_state = STATE_BELT_FORWARD;
+                break;
+            case STATE_BELT_FORWARD:
+                break;
+            case STATE_BELT_REVERSE:
+                break;
+            case STATE_BELT_STOPPED:
+                break;
+            case STATE_UNSECURE_HANDS:
+                break;
+            case STATE_ERROR:
+                break;
+            default:
+                break;
+            }
 
-        vTaskDelay(pdMS_TO_TICKS(10));
+            ESP_LOGI(TAG, "Current State: %s", main_fsm_get_state_string());
+        }
     }
 }
 
