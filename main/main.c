@@ -72,6 +72,7 @@ void app_main(void)
     while (1)
     {
         // For testing: Get data and print it every second
+        /*
         digital_inputs_t inputs = digital_input_get_data();
 
         printf("Inputs: Up: %d | Down: %d | Stop: %d | Barrier: %d | Emergency: %d\n",
@@ -87,6 +88,8 @@ void app_main(void)
         printf("total ticks: %d\n", bdc_driver_get_pulse_count());
         printf("current ticks: %d\n", bdc_driver_get_report_pulses());
         printf("Current FSM State: %s\n", main_fsm_get_state_string());
+
+        */
 
         vTaskDelay(pdMS_TO_TICKS(1000));
     }

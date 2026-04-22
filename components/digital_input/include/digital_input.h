@@ -18,6 +18,7 @@ typedef struct
     bool btn_stop;               // User button STOP
     bool light_barrier;          // Light barrier sensor (True if obstructed/triggered)
     bool emergency_switch_state; // MONITORING ONLY: Hardware Emergency Stop state (True if pressed/active)
+    bool inductive_switch;       // Inductive switch sensor (True if object detected)
 } digital_inputs_t;
 
 /**

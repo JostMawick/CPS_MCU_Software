@@ -11,7 +11,6 @@ The main logic is implemented using ESP-IDF components. The main application fil
 - Implement the complete FSM (Finite State Machine) logic
 - Improve documentation (generate better Doxygen output)
 - Develop more robust components (reduce issues caused by polling functions)
-- Transition the FSM from polling to an event-based architecture
 - Improve debug output by using consistent logging within the components themselves
 
 ## Hardware Requirements

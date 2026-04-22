@@ -15,6 +15,7 @@
 #define PIN_BTN_STOP CONFIG_DIGITAL_INPUT_PIN_BTN_STOP
 #define PIN_LIGHT_BARRIER CONFIG_DIGITAL_INPUT_PIN_LIGHT_BARRIER
 #define PIN_EMERGENCY CONFIG_DIGITAL_INPUT_PIN_EMERGENCY
+#define PIN_INDUCTIVE_SWITCH CONFIG_DIGITAL_INPUT_PIN_INDUCTIVE_SWITCH
 
 #define DEBOUNCE_TIME_US 50000 // 50ms
 
@@ -115,6 +116,15 @@ static void digital_input_task(void *arg)
                     ESP_LOGW(TAG, "EMERGENCY SWITCH STATE: %d", s_input_values.emergency_switch_state);
                     break;
 
+                case PIN_INDUCTIVE_SWITCH:
+                    // Active High with external pull-down
+                    if (s_input_values.inductive_switch == current_level)
+                        break;
+                    s_input_values.inductive_switch = current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
+                    ESP_LOGI(TAG, "INDUCTIVE SWITCH: %d", s_input_values.inductive_switch);
+                    break;
+
                 default:
                     break;
                 }
@@ -142,7 +152,7 @@ esp_err_t digital_input_init(void)
     if (s_input_mutex == NULL)
         return ESP_ERR_NO_MEM;
 
-    // 2. Configure GPIOs
+    // 2. Configure GPIOs - Block 1: Pins with Pull-Up (Active Low)
     gpio_config_t io_conf = {};
     io_conf.intr_type = GPIO_INTR_ANYEDGE; // Interrupt on both edges
     io_conf.mode = GPIO_MODE_INPUT;
@@ -160,6 +170,18 @@ esp_err_t digital_input_init(void)
     if (err != ESP_OK)
         return err;
 
+    // 2b. Configure GPIOs - Block 2: Inductive Switch with external Pull-Down
+    gpio_config_t io_conf_inductive = {};
+    io_conf_inductive.intr_type = GPIO_INTR_ANYEDGE; // Interrupt on both edges
+    io_conf_inductive.mode = GPIO_MODE_INPUT;
+    io_conf_inductive.pull_down_en = 0; // External pull-down used
+    io_conf_inductive.pull_up_en = 0;   // No internal pull-up
+    io_conf_inductive.pin_bit_mask = (1ULL << PIN_INDUCTIVE_SWITCH);
+
+    err = gpio_config(&io_conf_inductive);
+    if (err != ESP_OK)
+        return err;
+
     // 3. Install ISR Service
     err = gpio_install_isr_service(0);
     if (err != ESP_OK && err != ESP_ERR_INVALID_STATE)
@@ -174,6 +196,7 @@ esp_err_t digital_input_init(void)
     gpio_isr_handler_add(PIN_BTN_STOP, gpio_isr_handler, (void *)PIN_BTN_STOP);
     gpio_isr_handler_add(PIN_LIGHT_BARRIER, gpio_isr_handler, (void *)PIN_LIGHT_BARRIER);
     gpio_isr_handler_add(PIN_EMERGENCY, gpio_isr_handler, (void *)PIN_EMERGENCY);
+    gpio_isr_handler_add(PIN_INDUCTIVE_SWITCH, gpio_isr_handler, (void *)PIN_INDUCTIVE_SWITCH);
 
     // 5. Create Task
     BaseType_t ret = xTaskCreate(digital_input_task, "digital_input_task",

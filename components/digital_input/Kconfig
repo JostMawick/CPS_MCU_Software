@@ -31,6 +31,14 @@ menu "Digital Input Configuration"
             GPIO pin number monitoring the state of the hardware emergency stop circuit.
             NOTE: This is for software status only, not safety cutoff!
 
+    config DIGITAL_INPUT_PIN_INDUCTIVE_SWITCH
+        int "GPIO Pin for Inductive Switch"
+        default 34
+        help
+            GPIO pin number connected to the inductive switch input.
+            Input-only pin (GPIO34-39 are input-only on ESP32).
+            External pull-down resistor is used (not internal pull-up).
+
     config DIGITAL_INPUT_TASK_PRIORITY
         int "Digital Input Task Priority"
         default 10
