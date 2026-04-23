@@ -2,7 +2,7 @@ menu "Servo Control Configuration"
 
     config SERVO_PULSE_GPIO
         int "GPIO Pin for Servo PWM"
-        default 0
+        default 13
         help
             GPIO pin number connected to the PWM signal line of the servo.
 

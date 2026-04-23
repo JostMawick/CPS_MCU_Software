@@ -7,6 +7,7 @@
 #include "bdc_motor_driver.h"
 #include "led_control.h"
 #include "position_control.h"
+#include "servo_control.h"
 #include "main_fsm.h"
 
 void app_main(void)
@@ -58,6 +59,17 @@ void app_main(void)
         printf("LED Control init FAILED: %s\n", esp_err_to_name(err));
     }
 
+    // Init Servo Control
+    err = servo_control_init();
+    if (err == ESP_OK)
+    {
+        printf("Servo Control init successful.\n");
+    }
+    else
+    {
+        printf("Servo Control init FAILED: %s\n", esp_err_to_name(err));
+    }
+
     err = main_fsm_init();
     if (err == ESP_OK)
     {
@@ -72,24 +84,27 @@ void app_main(void)
     while (1)
     {
         // For testing: Get data and print it every second
-        /*
-        digital_inputs_t inputs = digital_input_get_data();
+         /*
+         digital_inputs_t inputs = digital_input_get_data();
 
-        printf("Inputs: Up: %d | Down: %d | Stop: %d | Barrier: %d | Emergency: %d\n",
-               inputs.btn_up,
-               inputs.btn_down,
-               inputs.btn_stop,
-               inputs.light_barrier,
-               inputs.emergency_switch_state);
+         // Updated debug fields to match refactored digital_inputs_t
+         printf("Inputs: HandguardR: %d | HandguardL: %d | Reset: %d | LightgateStart: %d | LightgateEnd: %d | Emergency: %d | Inductive: %d\n",
+             inputs.handguard_right,
+             inputs.handguard_left,
+             inputs.reset_btn,
+             inputs.lightgate_start,
+             inputs.lightgate_end,
+             inputs.emergency_btn,
+             inputs.inductive_switch);
 
-        printf("Revolutions %lf\n", bdc_driver_get_revolutions());
-        printf("Speed RPS %f\n", bdc_driver_get_speed_rps());
+         printf("Revolutions %lf\n", bdc_driver_get_revolutions());
+         printf("Speed RPS %f\n", bdc_driver_get_speed_rps());
 
-        printf("total ticks: %d\n", bdc_driver_get_pulse_count());
-        printf("current ticks: %d\n", bdc_driver_get_report_pulses());
-        printf("Current FSM State: %s\n", main_fsm_get_state_string());
+         printf("total ticks: %d\n", bdc_driver_get_pulse_count());
+         printf("current ticks: %d\n", bdc_driver_get_report_pulses());
+         printf("Current FSM State: %s\n", main_fsm_get_state_string());
 
-        */
+         */
 
         vTaskDelay(pdMS_TO_TICKS(1000));
     }

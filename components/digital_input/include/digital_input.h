@@ -7,18 +7,22 @@
 #include <stdbool.h>
 #include "esp_err.h"
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
+
 /**
  * @brief Structure holding the state of all digital inputs.
  *        This struct is returned by digital_input_get_data().
  */
 typedef struct
 {
-    bool btn_up;                 // User button UP
-    bool btn_down;               // User button DOWN
-    bool btn_stop;               // User button STOP
-    bool light_barrier;          // Light barrier sensor (True if obstructed/triggered)
-    bool emergency_switch_state; // MONITORING ONLY: Hardware Emergency Stop state (True if pressed/active)
-    bool inductive_switch;       // Inductive switch sensor (True if object detected)
+    bool handguard_right;    // Right handguard switch (active-low)
+    bool handguard_left;     // Left handguard switch (active-low)
+    bool reset_btn;          // Reset button (active-low)
+    bool lightgate_start;    // Lightgate start sensor (active-low)
+    bool lightgate_end;      // Lightgate end sensor (active-low)
+    bool emergency_btn;      // Emergency button (monitoring only, active-low)
+    bool inductive_switch;   // Inductive switch sensor (active-high, external pull-down)
 } digital_inputs_t;
 
 /**

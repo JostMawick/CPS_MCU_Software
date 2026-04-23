@@ -10,11 +10,12 @@
 #include "digital_input.h"
 
 // --- Configuration Mapping ---
-#define PIN_BTN_UP CONFIG_DIGITAL_INPUT_PIN_BTN_UP
-#define PIN_BTN_DOWN CONFIG_DIGITAL_INPUT_PIN_BTN_DOWN
-#define PIN_BTN_STOP CONFIG_DIGITAL_INPUT_PIN_BTN_STOP
-#define PIN_LIGHT_BARRIER CONFIG_DIGITAL_INPUT_PIN_LIGHT_BARRIER
-#define PIN_EMERGENCY CONFIG_DIGITAL_INPUT_PIN_EMERGENCY
+#define PIN_HANDGUARD_RIGHT CONFIG_DIGITAL_INPUT_PIN_HANDGUARD_RIGHT
+#define PIN_HANDGUARD_LEFT CONFIG_DIGITAL_INPUT_PIN_HANDGUARD_LEFT
+#define PIN_RESET_BTN CONFIG_DIGITAL_INPUT_PIN_RESET_BTN
+#define PIN_LIGHTGATE_START CONFIG_DIGITAL_INPUT_PIN_LIGHTGATE_START
+#define PIN_LIGHTGATE_END CONFIG_DIGITAL_INPUT_PIN_LIGHTGATE_END
+#define PIN_EMERGENCY_BTN CONFIG_DIGITAL_INPUT_PIN_EMERGENCY_BTN
 #define PIN_INDUCTIVE_SWITCH CONFIG_DIGITAL_INPUT_PIN_INDUCTIVE_SWITCH
 
 #define DEBOUNCE_TIME_US 50000 // 50ms
@@ -74,46 +75,54 @@ static void digital_input_task(void *arg)
 
                 switch (evt.pin)
                 {
-                case PIN_BTN_UP:
-                    if (s_input_values.btn_up == !current_level)
-                        break; // Check against ACTUAL level
-                    s_input_values.btn_up = !current_level;
-                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
-                    ESP_LOGI(TAG, "BTN UP: %d", s_input_values.btn_up);
-                    break;
-
-                case PIN_BTN_DOWN:
-                    if (s_input_values.btn_down == !current_level)
+                case PIN_HANDGUARD_RIGHT:
+                    if (s_input_values.handguard_right == !current_level)
                         break;
-                    s_input_values.btn_down = !current_level;
+                    s_input_values.handguard_right = !current_level;
                     xQueueSend(s_input_queue_debounced, &s_input_values, 0);
-                    ESP_LOGI(TAG, "BTN DOWN: %d", s_input_values.btn_down);
+                    ESP_LOGI(TAG, "HANDGUARD RIGHT: %d", s_input_values.handguard_right);
                     break;
 
-                case PIN_BTN_STOP:
-                    if (s_input_values.btn_stop == !current_level)
+                case PIN_HANDGUARD_LEFT:
+                    if (s_input_values.handguard_left == !current_level)
                         break;
-                    s_input_values.btn_stop = !current_level;
+                    s_input_values.handguard_left = !current_level;
                     xQueueSend(s_input_queue_debounced, &s_input_values, 0);
-                    ESP_LOGI(TAG, "BTN STOP: %d", s_input_values.btn_stop);
+                    ESP_LOGI(TAG, "HANDGUARD LEFT: %d", s_input_values.handguard_left);
                     break;
 
-                case PIN_LIGHT_BARRIER:
-                    // Assuming Light Barrier is also Active Low (Pull-Up)
-                    if (s_input_values.light_barrier == !current_level)
+                case PIN_RESET_BTN:
+                    if (s_input_values.reset_btn == !current_level)
                         break;
-                    s_input_values.light_barrier = !current_level;
+                    s_input_values.reset_btn = !current_level;
                     xQueueSend(s_input_queue_debounced, &s_input_values, 0);
-                    ESP_LOGI(TAG, "LIGHT BARRIER: %d", s_input_values.light_barrier);
+                    ESP_LOGI(TAG, "RESET BTN: %d", s_input_values.reset_btn);
                     break;
 
-                case PIN_EMERGENCY:
+                case PIN_LIGHTGATE_START:
+                    // Active Low (internal pull-up)
+                    if (s_input_values.lightgate_start == !current_level)
+                        break;
+                    s_input_values.lightgate_start = !current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
+                    ESP_LOGI(TAG, "LIGHTGATE START: %d", s_input_values.lightgate_start);
+                    break;
+
+                case PIN_LIGHTGATE_END:
+                    if (s_input_values.lightgate_end == !current_level)
+                        break;
+                    s_input_values.lightgate_end = !current_level;
+                    xQueueSend(s_input_queue_debounced, &s_input_values, 0);
+                    ESP_LOGI(TAG, "LIGHTGATE END: %d", s_input_values.lightgate_end);
+                    break;
+
+                case PIN_EMERGENCY_BTN:
                     // Monitoring only
-                    if (s_input_values.emergency_switch_state == !current_level)
+                    if (s_input_values.emergency_btn == !current_level)
                         break;
-                    s_input_values.emergency_switch_state = !current_level;
+                    s_input_values.emergency_btn = !current_level;
                     xQueueSend(s_input_queue_debounced, &s_input_values, 0);
-                    ESP_LOGW(TAG, "EMERGENCY SWITCH STATE: %d", s_input_values.emergency_switch_state);
+                    ESP_LOGW(TAG, "EMERGENCY BTN: %d", s_input_values.emergency_btn);
                     break;
 
                 case PIN_INDUCTIVE_SWITCH:
@@ -160,11 +169,12 @@ esp_err_t digital_input_init(void)
     io_conf.pull_up_en = 1; // Internal Pull-up enabled
 
     // Bitmask creation using OR (|) and Shift (<<)
-    io_conf.pin_bit_mask = (1ULL << PIN_BTN_UP) |
-                           (1ULL << PIN_BTN_DOWN) |
-                           (1ULL << PIN_BTN_STOP) |
-                           (1ULL << PIN_LIGHT_BARRIER) |
-                           (1ULL << PIN_EMERGENCY);
+    io_conf.pin_bit_mask = (1ULL << PIN_HANDGUARD_RIGHT) |
+                           (1ULL << PIN_HANDGUARD_LEFT) |
+                           (1ULL << PIN_RESET_BTN) |
+                           (1ULL << PIN_LIGHTGATE_START) |
+                           (1ULL << PIN_LIGHTGATE_END) |
+                           (1ULL << PIN_EMERGENCY_BTN);
 
     esp_err_t err = gpio_config(&io_conf);
     if (err != ESP_OK)
@@ -191,11 +201,12 @@ esp_err_t digital_input_init(void)
     }
 
     // 4. Add ISR Helpers
-    gpio_isr_handler_add(PIN_BTN_UP, gpio_isr_handler, (void *)PIN_BTN_UP);
-    gpio_isr_handler_add(PIN_BTN_DOWN, gpio_isr_handler, (void *)PIN_BTN_DOWN);
-    gpio_isr_handler_add(PIN_BTN_STOP, gpio_isr_handler, (void *)PIN_BTN_STOP);
-    gpio_isr_handler_add(PIN_LIGHT_BARRIER, gpio_isr_handler, (void *)PIN_LIGHT_BARRIER);
-    gpio_isr_handler_add(PIN_EMERGENCY, gpio_isr_handler, (void *)PIN_EMERGENCY);
+    gpio_isr_handler_add(PIN_HANDGUARD_RIGHT, gpio_isr_handler, (void *)PIN_HANDGUARD_RIGHT);
+    gpio_isr_handler_add(PIN_HANDGUARD_LEFT, gpio_isr_handler, (void *)PIN_HANDGUARD_LEFT);
+    gpio_isr_handler_add(PIN_RESET_BTN, gpio_isr_handler, (void *)PIN_RESET_BTN);
+    gpio_isr_handler_add(PIN_LIGHTGATE_START, gpio_isr_handler, (void *)PIN_LIGHTGATE_START);
+    gpio_isr_handler_add(PIN_LIGHTGATE_END, gpio_isr_handler, (void *)PIN_LIGHTGATE_END);
+    gpio_isr_handler_add(PIN_EMERGENCY_BTN, gpio_isr_handler, (void *)PIN_EMERGENCY_BTN);
     gpio_isr_handler_add(PIN_INDUCTIVE_SWITCH, gpio_isr_handler, (void *)PIN_INDUCTIVE_SWITCH);
 
     // 5. Create Task

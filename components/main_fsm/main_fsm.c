@@ -6,6 +6,7 @@
 #include "digital_input.h"
 #include "position_control.h"
 #include "led_control.h"
+#include "servo_control.h"
 #include "string.h"
 
 static const char *TAG = "MAIN_FSM";
@@ -28,6 +29,7 @@ static void main_fsm_task(void *arg)
 {
     ESP_LOGI(TAG, "Main FSM Task started");
     input_event_queue = digital_input_get_queue();
+    esp_err_t err;
 
     while (1)
     {
@@ -37,10 +39,15 @@ static void main_fsm_task(void *arg)
             switch (current_state)
             {
             case STATE_IDLE:
-                if (s_digital_inputs.btn_up)
+                err = servo_control_set_angle(0);
+                if (s_digital_inputs.lightgate_start)
                     current_state = STATE_BELT_FORWARD;
+
                 break;
             case STATE_BELT_FORWARD:
+                err = servo_control_set_angle(45);
+                if (s_digital_inputs.lightgate_end)
+                    current_state = STATE_IDLE;
                 break;
             case STATE_BELT_REVERSE:
                 break;
