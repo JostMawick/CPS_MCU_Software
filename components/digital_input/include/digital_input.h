@@ -16,13 +16,13 @@
  */
 typedef struct
 {
-    bool handguard_right;    // Right handguard switch (active-low)
-    bool handguard_left;     // Left handguard switch (active-low)
-    bool reset_btn;          // Reset button (active-low)
-    bool lightgate_start;    // Lightgate start sensor (active-low)
-    bool lightgate_end;      // Lightgate end sensor (active-low)
-    bool emergency_btn;      // Emergency button (monitoring only, active-low)
-    bool inductive_switch;   // Inductive switch sensor (active-high, external pull-down)
+    bool handguard_right;  // Right handguard switch (active-low)
+    bool handguard_left;   // Left handguard switch (active-low)
+    bool reset_btn;        // Reset button (active-low)
+    bool lightgate_start;  // Lightgate start sensor (active-low)
+    bool lightgate_end;    // Lightgate end sensor (active-low)
+    bool emergency_btn;    // Emergency button (monitoring only, active-low)
+    bool inductive_switch; // Inductive switch sensor (active-high, external pull-down)
 } digital_inputs_t;
 
 /**

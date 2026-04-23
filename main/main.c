@@ -84,27 +84,27 @@ void app_main(void)
     while (1)
     {
         // For testing: Get data and print it every second
-         /*
-         digital_inputs_t inputs = digital_input_get_data();
+        /*
+        digital_inputs_t inputs = digital_input_get_data();
 
-         // Updated debug fields to match refactored digital_inputs_t
-         printf("Inputs: HandguardR: %d | HandguardL: %d | Reset: %d | LightgateStart: %d | LightgateEnd: %d | Emergency: %d | Inductive: %d\n",
-             inputs.handguard_right,
-             inputs.handguard_left,
-             inputs.reset_btn,
-             inputs.lightgate_start,
-             inputs.lightgate_end,
-             inputs.emergency_btn,
-             inputs.inductive_switch);
+        // Updated debug fields to match refactored digital_inputs_t
+        printf("Inputs: HandguardR: %d | HandguardL: %d | Reset: %d | LightgateStart: %d | LightgateEnd: %d | Emergency: %d | Inductive: %d\n",
+            inputs.handguard_right,
+            inputs.handguard_left,
+            inputs.reset_btn,
+            inputs.lightgate_start,
+            inputs.lightgate_end,
+            inputs.emergency_btn,
+            inputs.inductive_switch);
 
-         printf("Revolutions %lf\n", bdc_driver_get_revolutions());
-         printf("Speed RPS %f\n", bdc_driver_get_speed_rps());
+        printf("Revolutions %lf\n", bdc_driver_get_revolutions());
+        printf("Speed RPS %f\n", bdc_driver_get_speed_rps());
 
-         printf("total ticks: %d\n", bdc_driver_get_pulse_count());
-         printf("current ticks: %d\n", bdc_driver_get_report_pulses());
-         printf("Current FSM State: %s\n", main_fsm_get_state_string());
+        printf("total ticks: %d\n", bdc_driver_get_pulse_count());
+        printf("current ticks: %d\n", bdc_driver_get_report_pulses());
+        printf("Current FSM State: %s\n", main_fsm_get_state_string());
 
-         */
+        */
 
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
