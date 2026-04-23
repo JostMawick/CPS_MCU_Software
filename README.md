@@ -12,21 +12,22 @@ The main logic is implemented using ESP-IDF components. The main application fil
 - Improve documentation (generate better Doxygen output)
 - Develop more robust components (reduce issues caused by polling functions)
 - Improve debug output by using consistent logging within the components themselves
+- Make digital_inputs more fexible (not so static, more options like diffrent debounce times)
 
 ## Hardware Requirements
 
 This project targets a **NodeMCU ESP32-S** development board. Currently, no external hardware is attached, but the planned basic pinout is structured as follows:
 
-| Component        | Pin (Example/TBD) | Description                      |
-| :--------------- | :---------------- | :------------------------------- |
-| BDC Motor PWM A  | `TBD`             | PWM signal for forward direction |
-| BDC Motor PWM B  | `TBD`             | PWM signal for reverse direction |
-| Encoder A        | `TBD`             | PCNT input A                     |
-| Encoder B        | `TBD`             | PCNT input B                     |
-| Inductive Sensor | `TBD`             | Detects metallic objects         |
-| Light Barrier    | `TBD`             | Conveyor belt limits / safety    |
-| User Buttons     | `TBD`             | Up, Down, Stop controls          |
-| Servo PWM        | `TBD`             | PWM signal for servo control     |
+| Component                | Pin (Example/TBD) | Description                                              |
+| :----------------------- | :---------------- | :------------------------------------------------------- |
+| BDC Motor PWM A          | `TBD`             | PWM signal for forward direction                         |
+| BDC Motor PWM B          | `TBD`             | PWM signal for reverse direction                         |
+| Encoder / Decoder (opt.) | `TBD`             | Rotary encoder inputs (PCNT). External decoder optional. |
+| Inductive Sensor         | `TBD`             | Detects metallic objects                                 |
+| Lightgate START          | `TBD`             | Light sensor at conveyor start (safety / position)       |
+| Lightgate END            | `TBD`             | Light sensor at conveyor end (safety / position)         |
+| Handguards / Buttons     | `TBD`             | Handguard switches (right/left), Reset and Emergency btn |
+| Servo PWM                | `TBD`             | PWM signal for servo control                             |
 
 _(Note: The exact GPIO assignment is subject to change as hardware integration progresses.)_
 It can always be changed later in the Kconfig.
