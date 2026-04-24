@@ -4,9 +4,6 @@
 			"path": "."
 		},
 		{
-			"path": "../example_code/mcpwm_servo_control"
-		},
-		{
 			"path": "../../../../../Users/jmawi/Documents/esp_idf/examples"
 		}
 	],

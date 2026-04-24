@@ -92,12 +92,14 @@ static void pid_loop_cb(void *args)
     float error = ctx->pid_expect_speed_in_ticks - abs(real_pulses); // expected speed and real pulses must be positive
     float new_speed = 0;
 
-    // set the new speed
-    if (ctx->pid_enabled)
-    {
-        pid_compute(pid_ctrl, error, &new_speed);
-        bdc_motor_set_speed(motor, (uint32_t)new_speed);
-    }
+    /*
+        // set the new speed
+        if (ctx->pid_enabled)
+        {
+            pid_compute(pid_ctrl, error, &new_speed);
+            bdc_motor_set_speed(motor, (uint32_t)new_speed);
+        }
+    */
 }
 
 esp_err_t bdc_motor_driver_init(void)

@@ -110,7 +110,7 @@ esp_err_t servo_control_set_angle(int angle)
         return ESP_ERR_INVALID_ARG;
     }
 
-    ESP_LOGI(TAG, "Setting angle to %d", angle);
+    // ESP_LOGI(TAG, "Setting angle to %d", angle);
     esp_err_t err = mcpwm_comparator_set_compare_value(s_servo_ctx.comparator, angle_to_compare(angle));
     if (err != ESP_OK)
     {

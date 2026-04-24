@@ -69,43 +69,39 @@ void app_main(void)
     {
         printf("Servo Control init FAILED: %s\n", esp_err_to_name(err));
     }
-
-    err = main_fsm_init();
-    if (err == ESP_OK)
-    {
-        printf("Main FSM init successful.\n");
-    }
-    else
-    {
-        printf("Main FSM init FAILED: %s\n", esp_err_to_name(err));
-    }
-
+    /*
+        err = main_fsm_init();
+        if (err == ESP_OK)
+        {
+            printf("Main FSM init successful.\n");
+        }
+        else
+        {
+            printf("Main FSM init FAILED: %s\n", esp_err_to_name(err));
+        }
+    */
+    printf("V2\n");
     // 2. Main Loop
     while (1)
     {
         // For testing: Get data and print it every second
-        /*
+        int angle = 0;
+
         digital_inputs_t inputs = digital_input_get_data();
 
-        // Updated debug fields to match refactored digital_inputs_t
-        printf("Inputs: HandguardR: %d | HandguardL: %d | Reset: %d | LightgateStart: %d | LightgateEnd: %d | Emergency: %d | Inductive: %d\n",
-            inputs.handguard_right,
-            inputs.handguard_left,
-            inputs.reset_btn,
-            inputs.lightgate_start,
-            inputs.lightgate_end,
-            inputs.emergency_btn,
-            inputs.inductive_switch);
+        if (inputs.lightgate_start == true)
+        {
+            bdc_driver_set_pwm(1.0f);
+            servo_control_set_angle(angle);
+        }
 
-        printf("Revolutions %lf\n", bdc_driver_get_revolutions());
-        printf("Speed RPS %f\n", bdc_driver_get_speed_rps());
+        if (inputs.lightgate_end == true)
+        {
+            bdc_driver_set_pwm(-0.5f);
+            servo_control_set_angle(0);
+        }
 
-        printf("total ticks: %d\n", bdc_driver_get_pulse_count());
-        printf("current ticks: %d\n", bdc_driver_get_report_pulses());
-        printf("Current FSM State: %s\n", main_fsm_get_state_string());
-
-        */
-
+        angle = (angle + 10) % 180;
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

@@ -5,6 +5,7 @@
 #include "main_fsm.h"
 #include "digital_input.h"
 #include "position_control.h"
+#include "bdc_motor_driver.h"
 #include "led_control.h"
 #include "servo_control.h"
 #include "string.h"
@@ -22,6 +23,7 @@ typedef enum
 } fsm_state_t;
 
 static fsm_state_t current_state = STATE_IDLE;
+static fsm_state_t previous_state = STATE_IDLE;
 static QueueHandle_t input_event_queue = NULL;
 static digital_inputs_t s_digital_inputs;
 
@@ -33,36 +35,35 @@ static void main_fsm_task(void *arg)
 
     while (1)
     {
-        if (xQueueReceive(input_event_queue, &s_digital_inputs, portMAX_DELAY))
+
+        s_digital_inputs = digital_input_get_data();
+
+        switch (current_state)
         {
+        case STATE_IDLE:
 
-            switch (current_state)
-            {
-            case STATE_IDLE:
-                err = servo_control_set_angle(0);
-                if (s_digital_inputs.lightgate_start)
-                    current_state = STATE_BELT_FORWARD;
+            if (s_digital_inputs.lightgate_start)
+                current_state = STATE_BELT_FORWARD;
 
-                break;
-            case STATE_BELT_FORWARD:
-                err = servo_control_set_angle(45);
-                if (s_digital_inputs.lightgate_end)
-                    current_state = STATE_IDLE;
-                break;
-            case STATE_BELT_REVERSE:
-                break;
-            case STATE_BELT_STOPPED:
-                break;
-            case STATE_UNSECURE_HANDS:
-                break;
-            case STATE_ERROR:
-                break;
-            default:
-                break;
-            }
+            break;
+        case STATE_BELT_FORWARD:
 
-            ESP_LOGI(TAG, "Current State: %s", main_fsm_get_state_string());
+            if (s_digital_inputs.lightgate_end)
+                current_state = STATE_IDLE;
+            break;
+        case STATE_BELT_REVERSE:
+            break;
+        case STATE_BELT_STOPPED:
+            break;
+        case STATE_UNSECURE_HANDS:
+            break;
+        case STATE_ERROR:
+            break;
+        default:
+            break;
         }
+
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 
