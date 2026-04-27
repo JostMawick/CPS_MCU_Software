@@ -2,19 +2,19 @@ menu "Digital Input Configuration"
 
     config DIGITAL_INPUT_PIN_HANDGUARD_RIGHT
         int "GPIO Pin for Handguard RIGHT"
-        default 21
+        default 18
         help
             GPIO pin number connected to the right handguard switch (User Input).
 
     config DIGITAL_INPUT_PIN_HANDGUARD_LEFT
         int "GPIO Pin for Handguard LEFT"
-        default 18
+        default 19
         help
             GPIO pin number connected to the left handguard switch (User Input).
 
     config DIGITAL_INPUT_PIN_RESET_BTN
         int "GPIO Pin for Reset Button"
-        default 19
+        default 21
         help
             GPIO pin number connected to the Reset button (User Input).
 
