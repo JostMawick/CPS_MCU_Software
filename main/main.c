@@ -69,39 +69,21 @@ void app_main(void)
     {
         printf("Servo Control init FAILED: %s\n", esp_err_to_name(err));
     }
-    /*
-        err = main_fsm_init();
-        if (err == ESP_OK)
-        {
-            printf("Main FSM init successful.\n");
-        }
-        else
-        {
-            printf("Main FSM init FAILED: %s\n", esp_err_to_name(err));
-        }
-    */
-    printf("V2\n");
-    // 2. Main Loop
+
+    err = main_fsm_init();
+    if (err == ESP_OK)
+    {
+        printf("Main FSM init successful.\n");
+    }
+    else
+    {
+        printf("Main FSM init FAILED: %s\n", esp_err_to_name(err));
+    }
+
+    printf("V3\n");
+
     while (1)
     {
-        // For testing: Get data and print it every second
-        int angle = 0;
-
-        digital_inputs_t inputs = digital_input_get_data();
-
-        if (inputs.lightgate_start == true)
-        {
-            bdc_driver_set_pwm(1.0f);
-            servo_control_set_angle(angle);
-        }
-
-        if (inputs.lightgate_end == true)
-        {
-            bdc_driver_set_pwm(-0.5f);
-            servo_control_set_angle(0);
-        }
-
-        angle = (angle + 10) % 180;
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

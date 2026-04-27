@@ -21,14 +21,15 @@ This project targets a **NodeMCU ESP32-S** development board. Currently, no exte
 
 | Component                | Pin (Example/TBD) | Description                                              |
 | :----------------------- | :---------------- | :------------------------------------------------------- |
-| BDC Motor PWM A          | `TBD`             | PWM signal for forward direction                         |
-| BDC Motor PWM B          | `TBD`             | PWM signal for reverse direction                         |
-| Encoder / Decoder (opt.) | `TBD`             | Rotary encoder inputs (PCNT). External decoder optional. |
-| Inductive Sensor         | `TBD`             | Detects metallic objects                                 |
-| Lightgate START          | `TBD`             | Light sensor at conveyor start (safety / position)       |
-| Lightgate END            | `TBD`             | Light sensor at conveyor end (safety / position)         |
-| Handguards / Buttons     | `TBD`             | Handguard switches (right/left), Reset and Emergency btn |
-| Servo PWM                | `TBD`             | PWM signal for servo control                             |
+| BDC Motor PWM A          | GPIO 13           | PWM signal for forward direction                         |
+| BDC Motor PWM B          | GPIO 15           | PWM signal for reverse direction                         |
+| Encoder / Decoder (opt.) | Not connected     | Rotary encoder inputs (PCNT). External decoder optional. |
+| Inductive Sensor         | GPIO 34           | Detects metallic objects                                 |
+| Lightgate START          | GPIO 22           | Light sensor at conveyor start (safety / position)       |
+| Lightgate END            | GPIO 23           | Light sensor at conveyor end (safety / position)         |
+| Handguards / Buttons     | 21,18,19,5        | Right(21), Left(18), Reset(19), Emergency(5)             |
+| LED Control              | GPIO 4            | Status LED                                               |
+| Servo PWM                | GPIO 0            | PWM signal for servo control                             |
 
 _(Note: The exact GPIO assignment is subject to change as hardware integration progresses.)_
 It can always be changed later in the Kconfig.

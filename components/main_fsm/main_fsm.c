@@ -41,12 +41,16 @@ static void main_fsm_task(void *arg)
         switch (current_state)
         {
         case STATE_IDLE:
+            bdc_driver_set_pwm(0);
+            servo_control_set_angle(0);
 
             if (s_digital_inputs.lightgate_start)
                 current_state = STATE_BELT_FORWARD;
 
             break;
         case STATE_BELT_FORWARD:
+            bdc_driver_set_pwm(1.0f);
+            servo_control_set_angle(90);
 
             if (s_digital_inputs.lightgate_end)
                 current_state = STATE_IDLE;
