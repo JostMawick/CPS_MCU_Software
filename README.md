@@ -29,7 +29,7 @@ This project targets a **NodeMCU ESP32-S** development board. Currently, no exte
 | Lightgate END            | GPIO 23           | Light sensor at conveyor end (safety / position)         |
 | Handguards / Buttons     | 21,18,19,5        | Right(18), Left(19), Reset(21), Emergency(5)             |
 | LED Control              | GPIO 4            | Status LED                                               |
-| Servo PWM                | GPIO 0            | PWM signal for servo control                             |
+| Servo PWM                | GPIO 27           | PWM signal for servo control                             |
 
 _(Note: The exact GPIO assignment is subject to change as hardware integration progresses.)_
 It can always be changed later in the Kconfig.
