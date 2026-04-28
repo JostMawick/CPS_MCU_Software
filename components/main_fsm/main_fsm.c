@@ -10,7 +10,7 @@
 #include "servo_control.h"
 #include "string.h"
 
-#define SERVO_ANGLE_CLEAR 0
+#define SERVO_ANGLE_CLEAR 90
 #define SERVO_ANGLE_PUSH -90
 
 static const char *TAG = "MAIN_FSM";
@@ -99,7 +99,7 @@ static void main_fsm_task(void *arg)
                 current_state = STATE_METAL_DETECTED;
             else if (s_digital_inputs.lightgate_end)
                 current_state = STATE_CHECK_BOXCOUNT;
-            else if (s_digital_inputs.handguard_left && s_digital_inputs.handguard_right == false)
+            else if ((s_digital_inputs.handguard_left && s_digital_inputs.handguard_right) == false)
                 current_state = STATE_WAIT_FOR_HANDGUARD;
             if (s_digital_inputs.emergency_btn)
                 current_state = STATE_EMERGENCY;
@@ -131,7 +131,7 @@ static void main_fsm_task(void *arg)
             led_control_set_mode(LED_MODE_BLINK_SLOW);
             bdc_driver_set_pwm(1.0f);
             servo_control_set_angle(SERVO_ANGLE_CLEAR);
-            vTaskDelay(pdMS_TO_TICKS(1000));
+            vTaskDelay(pdMS_TO_TICKS(1500));
             current_state = STATE_IDLE;
             break;
 
