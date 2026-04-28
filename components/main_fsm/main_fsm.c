@@ -10,16 +10,21 @@
 #include "servo_control.h"
 #include "string.h"
 
+#define SERVO_ANGLE_CLEAR 0
+#define SERVO_ANGLE_PUSH -90
+
 static const char *TAG = "MAIN_FSM";
 
 typedef enum
 {
     STATE_IDLE,
-    STATE_BELT_FORWARD,
-    STATE_BELT_REVERSE,
-    STATE_BELT_STOPPED,
-    STATE_UNSECURE_HANDS,
-    STATE_ERROR
+    STATE_WAIT_FOR_HANDGUARD,
+    STATE_RESET_BOXCOUNT,
+    STATE_MOVE_BAND,
+    STATE_CHECK_BOXCOUNT,
+    STATE_INVALID_BOXCOUNT,
+    STATE_METAL_DETECTED,
+    STATE_EMERGENCY
 } fsm_state_t;
 
 static fsm_state_t current_state = STATE_IDLE;
@@ -41,30 +46,60 @@ static void main_fsm_task(void *arg)
         switch (current_state)
         {
         case STATE_IDLE:
-            bdc_driver_set_pwm(0);
-            servo_control_set_angle(0);
-
-            if (s_digital_inputs.lightgate_start)
-                current_state = STATE_BELT_FORWARD;
-
+            led_control_set_mode(LED_MODE_BLINK_SLOW);
+            bdc_driver_set_pwm(0.0f);
+            servo_control_set_angle(SERVO_ANGLE_PUSH);
             break;
-        case STATE_BELT_FORWARD:
+
+        case STATE_WAIT_FOR_HANDGUARD:
+            led_control_set_mode(LED_MODE_BLINK_SLOW);
+            bdc_driver_set_pwm(0.0f);
+            servo_control_set_angle(SERVO_ANGLE_CLEAR);
+            break;
+
+        case STATE_RESET_BOXCOUNT:
+            led_control_set_mode(LED_MODE_BLINK_SLOW);
+            bdc_driver_set_pwm(0.0f);
+            servo_control_set_angle(SERVO_ANGLE_PUSH);
+            break;
+
+        case STATE_MOVE_BAND:
+            led_control_set_mode(LED_MODE_ON);
             bdc_driver_set_pwm(1.0f);
-            servo_control_set_angle(90);
+            servo_control_set_angle(SERVO_ANGLE_CLEAR);
+            break;
 
-            if (s_digital_inputs.lightgate_end)
-                current_state = STATE_IDLE;
+        case STATE_CHECK_BOXCOUNT:
+            led_control_set_mode(LED_MODE_ON);
+            bdc_driver_set_pwm(0.0f);
+            servo_control_set_angle(SERVO_ANGLE_CLEAR);
             break;
-        case STATE_BELT_REVERSE:
+
+        case STATE_INVALID_BOXCOUNT:
+            led_control_set_mode(LED_MODE_BLINK_SLOW);
+            bdc_driver_set_pwm(0.0f);
+            servo_control_set_angle(SERVO_ANGLE_PUSH);
             break;
-        case STATE_BELT_STOPPED:
+
+        case STATE_METAL_DETECTED:
+            led_control_set_mode(LED_MODE_BLINK_SLOW);
+            bdc_driver_set_pwm(0.0f);
+            servo_control_set_angle(SERVO_ANGLE_PUSH);
             break;
-        case STATE_UNSECURE_HANDS:
+
+        case STATE_EMERGENCY:
+            led_control_set_mode(LED_MODE_BLINK_SLOW);
+            bdc_driver_set_pwm(0.0f);
+            servo_control_set_angle(SERVO_ANGLE_PUSH);
             break;
-        case STATE_ERROR:
-            break;
+
         default:
             break;
+        }
+
+        if (xQueueReceive(input_event_queue, &s_digital_inputs, 0) == pdPASS)
+        {
+            ESP_LOGI(TAG, "Current State: %s", main_fsm_get_state_string());
         }
 
         vTaskDelay(pdMS_TO_TICKS(10));
@@ -94,16 +129,20 @@ const char *main_fsm_get_state_string(void)
     {
     case STATE_IDLE:
         return "IDLE";
-    case STATE_BELT_FORWARD:
-        return "BELT_FORWARD";
-    case STATE_BELT_REVERSE:
-        return "BELT_REVERSE";
-    case STATE_BELT_STOPPED:
-        return "BELT_STOPPED";
-    case STATE_UNSECURE_HANDS:
-        return "UNSECURE_HANDS";
-    case STATE_ERROR:
-        return "ERROR";
+    case STATE_WAIT_FOR_HANDGUARD:
+        return "WAIT_FOR_HANDGUARD";
+    case STATE_RESET_BOXCOUNT:
+        return "RESET_BOXCOUNT";
+    case STATE_MOVE_BAND:
+        return "MOVE_BAND";
+    case STATE_CHECK_BOXCOUNT:
+        return "CHECK_BOXCOUNT";
+    case STATE_INVALID_BOXCOUNT:
+        return "INVALID_BOXCOUNT";
+    case STATE_METAL_DETECTED:
+        return "METAL_DETECTED";
+    case STATE_EMERGENCY:
+        return "EMERGENCY";
     default:
         return "UNKNOWN";
     }

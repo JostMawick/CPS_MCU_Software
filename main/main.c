@@ -82,8 +82,12 @@ void app_main(void)
 
     printf("V3\n");
 
+    // int x = 90;
     while (1)
     {
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        // servo_control_set_angle(x);
+        // printf("Set servo angle to %d degrees\n", x);
+        vTaskDelay(pdMS_TO_TICKS(5000));
+        // x *= -1;
     }
 }
