@@ -22,13 +22,13 @@ menu "Servo Control Configuration"
 
     config SERVO_MIN_DEGREE
         int "Minimum Angle (Degree)"
-        default -90
+        default -360
         help
             Minimum angle of the servo.
 
     config SERVO_MAX_DEGREE
         int "Maximum Angle (Degree)"
-        default 90
+        default 360
         help
             Maximum angle of the servo.
 
