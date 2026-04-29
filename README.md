@@ -45,12 +45,15 @@ The project relies on the official ESP-IDF framework and uses modular components
 
 The system logic is governed by a Finite State Machine (`main_fsm.c`) with the following primary states:
 
-- **IDLE**
-- **BELT_FORWARD**
-- **BELT_REVERSE**
-- **BELT_STOPPED**
-- **UNSECURE_HANDS**
-- **ERROR**
+- **IDLE**: System is idle, waiting for objects to be detected at the start lightgate.
+- **WAIT_FOR_HANDGUARD**: Object detected, waiting for both handguards to be activated.
+- **RESET_BOXCOUNT**: Resetting the box count after emergency or invalid state.
+- **MOVE_BAND**: Conveyor belt is moving forward, transporting objects.
+- **CHECK_BOXCOUNT**: Checking the box count after an object passes the end lightgate.
+- **INVALID_BOXCOUNT**: Invalid box count detected (negative count), requires manual reset.
+- **METAL_DETECTED**: Metal object detected by inductive sensor, servo pushes it aside.
+- **EMERGENCY**: Emergency button pressed, system stopped.
+- **WAIT_FOR_CLEAR**: Waiting 2s for the conveyor to clear after processing.
 
 ## Build, Flash, and Monitor
 
