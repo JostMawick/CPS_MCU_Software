@@ -11,8 +11,8 @@
 #include "servo_control.h"
 #include "string.h"
 
-#define SERVO_ANGLE_CLEAR 90
-#define SERVO_ANGLE_PUSH -90
+#define SERVO_ANGLE_CLEAR 80
+#define SERVO_ANGLE_PUSH -80
 
 static const char *TAG = "MAIN_FSM";
 
@@ -35,6 +35,7 @@ static digital_inputs_t s_digital_inputs;
 static int box_count = 0;
 static bool previous_lightgate_start = false;
 static bool previous_lightgate_end = false;
+static bool previous_inductive_switch = false;
 
 /*---------------------SW Timer------------------*/
 static TimerHandle_t metal_detected_timer = NULL;
@@ -45,13 +46,15 @@ static bool clear_timer_expired = false;
 static void metal_detected_timer_callback(TimerHandle_t xTimer)
 {
     metal_timer_expired = true;
-    xQueueSendFromISR(input_event_queue, &s_digital_inputs, NULL);
+    s_digital_inputs = digital_input_get_data();
+    xQueueSend(input_event_queue, &s_digital_inputs, 0);
 }
 
 static void wait_for_clear_timer_callback(TimerHandle_t xTimer)
 {
     clear_timer_expired = true;
-    xQueueSendFromISR(input_event_queue, &s_digital_inputs, NULL);
+    s_digital_inputs = digital_input_get_data();
+    xQueueSend(input_event_queue, &s_digital_inputs, 0);
 }
 
 static void main_fsm_task(void *arg)
@@ -70,6 +73,11 @@ static void main_fsm_task(void *arg)
             }
 
             if ((s_digital_inputs.lightgate_end == true) && (previous_lightgate_end == false))
+            {
+                box_count--;
+            }
+
+            if ((s_digital_inputs.inductive_switch == true) && (previous_inductive_switch == false))
             {
                 box_count--;
             }
@@ -92,6 +100,10 @@ static void main_fsm_task(void *arg)
 
                 if (s_digital_inputs.handguard_right && s_digital_inputs.handguard_left)
                     current_state = STATE_MOVE_BAND;
+
+                if (s_digital_inputs.inductive_switch)
+                    current_state = STATE_METAL_DETECTED;
+
                 break;
 
             case STATE_MOVE_BAND:
@@ -117,10 +129,17 @@ static void main_fsm_task(void *arg)
                     metal_timer_expired = false;
                     current_state = STATE_EMERGENCY;
                 }
+                else if ((s_digital_inputs.handguard_left && s_digital_inputs.handguard_right) == false)
+                {
+                    xTimerStop(metal_detected_timer, 0);
+                    metal_timer_expired = false;
+                    current_state = STATE_WAIT_FOR_HANDGUARD;
+                }
+
                 else if (metal_timer_expired)
                 {
                     metal_timer_expired = false;
-                    current_state = STATE_MOVE_BAND;
+                    current_state = STATE_CHECK_BOXCOUNT;
                 }
                 break;
 
@@ -169,6 +188,7 @@ static void main_fsm_task(void *arg)
 
             previous_lightgate_start = s_digital_inputs.lightgate_start;
             previous_lightgate_end = s_digital_inputs.lightgate_end;
+            previous_inductive_switch = s_digital_inputs.inductive_switch;
 
             /*---------------Execute Actions---------------*/
             switch (current_state)
@@ -240,6 +260,7 @@ static void main_fsm_task(void *arg)
             }
 
             ESP_LOGI(TAG, "Current State: %s", main_fsm_get_state_string());
+            ESP_LOGI(TAG, "Box Count: %d", box_count);
         }
     }
 }

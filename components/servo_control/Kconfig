@@ -8,27 +8,27 @@ menu "Servo Control Configuration"
 
     config SERVO_MIN_PULSEWIDTH_US
         int "Minimum Pulse Width (us)"
-        default 500
+        default 1000
         help
             Minimum pulse width in microseconds (typically maps to minimum angle).
             Consult your servo datasheet.
 
     config SERVO_MAX_PULSEWIDTH_US
         int "Maximum Pulse Width (us)"
-        default 2500
+        default 2000
         help
             Maximum pulse width in microseconds (typically maps to maximum angle).
             Consult your servo datasheet.
 
     config SERVO_MIN_DEGREE
         int "Minimum Angle (Degree)"
-        default -360
+        default -90
         help
             Minimum angle of the servo.
 
     config SERVO_MAX_DEGREE
         int "Maximum Angle (Degree)"
-        default 360
+        default 90
         help
             Maximum angle of the servo.
 
