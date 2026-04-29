@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/timers.h"
 #include "esp_log.h"
 #include "main_fsm.h"
 #include "digital_input.h"
@@ -35,15 +36,32 @@ static int box_count = 0;
 static bool previous_lightgate_start = false;
 static bool previous_lightgate_end = false;
 
+/*---------------------SW Timer------------------*/
+static TimerHandle_t metal_detected_timer = NULL;
+static TimerHandle_t wait_for_clear_timer = NULL;
+static bool metal_timer_expired = false;
+static bool clear_timer_expired = false;
+
+static void metal_detected_timer_callback(TimerHandle_t xTimer)
+{
+    metal_timer_expired = true;
+    xQueueSendFromISR(input_event_queue, &s_digital_inputs, NULL);
+}
+
+static void wait_for_clear_timer_callback(TimerHandle_t xTimer)
+{
+    clear_timer_expired = true;
+    xQueueSendFromISR(input_event_queue, &s_digital_inputs, NULL);
+}
+
 static void main_fsm_task(void *arg)
 {
     ESP_LOGI(TAG, "Main FSM Task started");
     input_event_queue = digital_input_get_queue();
-    esp_err_t err;
 
     while (1)
     {
-        if (xQueueReceive(input_event_queue, &s_digital_inputs, 0) == pdPASS)
+        if (xQueueReceive(input_event_queue, &s_digital_inputs, portMAX_DELAY) == pdPASS)
         {
             /*---------------------Box Count Logic------------------*/
             if ((s_digital_inputs.lightgate_start == true) && (previous_lightgate_start == false))
@@ -57,7 +75,7 @@ static void main_fsm_task(void *arg)
             }
             /*NOTE: Update previous state later in code to avoid multiple triggers*/
 
-            /*---------------Analyse Trasnsition Logic---------------*/
+            /*---------------Analyse Transition Logic---------------*/
             switch (current_state)
             {
             case STATE_IDLE:
@@ -69,7 +87,6 @@ static void main_fsm_task(void *arg)
                 break;
 
             case STATE_WAIT_FOR_HANDGUARD:
-
                 if (s_digital_inputs.emergency_btn)
                     current_state = STATE_EMERGENCY;
 
@@ -78,7 +95,6 @@ static void main_fsm_task(void *arg)
                 break;
 
             case STATE_MOVE_BAND:
-
                 if (s_digital_inputs.emergency_btn)
                     current_state = STATE_EMERGENCY;
 
@@ -89,17 +105,26 @@ static void main_fsm_task(void *arg)
                     current_state = STATE_METAL_DETECTED;
 
                 else if ((s_digital_inputs.lightgate_end == true) && (previous_lightgate_end == false))
-                {
                     current_state = STATE_CHECK_BOXCOUNT;
-                }
 
                 break;
 
             case STATE_METAL_DETECTED:
+                // Emergency kann jetzt reagieren!
+                if (s_digital_inputs.emergency_btn)
+                {
+                    xTimerStop(metal_detected_timer, 0);
+                    metal_timer_expired = false;
+                    current_state = STATE_EMERGENCY;
+                }
+                else if (metal_timer_expired)
+                {
+                    metal_timer_expired = false;
+                    current_state = STATE_MOVE_BAND;
+                }
                 break;
 
             case STATE_CHECK_BOXCOUNT:
-
                 if (box_count == 0)
                     current_state = STATE_WAIT_FOR_CLEAR;
 
@@ -111,10 +136,21 @@ static void main_fsm_task(void *arg)
                 break;
 
             case STATE_WAIT_FOR_CLEAR:
+                // Emergency kann jetzt reagieren!
+                if (s_digital_inputs.emergency_btn)
+                {
+                    xTimerStop(wait_for_clear_timer, 0);
+                    clear_timer_expired = false;
+                    current_state = STATE_EMERGENCY;
+                }
+                else if (clear_timer_expired)
+                {
+                    clear_timer_expired = false;
+                    current_state = STATE_IDLE;
+                }
                 break;
 
             case STATE_INVALID_BOXCOUNT:
-
                 if (s_digital_inputs.reset_btn)
                     current_state = STATE_RESET_BOXCOUNT;
                 break;
@@ -135,7 +171,6 @@ static void main_fsm_task(void *arg)
             previous_lightgate_end = s_digital_inputs.lightgate_end;
 
             /*---------------Execute Actions---------------*/
-
             switch (current_state)
             {
             case STATE_IDLE:
@@ -160,8 +195,9 @@ static void main_fsm_task(void *arg)
                 led_control_set_mode(LED_MODE_ON);
                 bdc_driver_set_pwm(0.0f);
                 servo_control_set_angle(SERVO_ANGLE_PUSH);
-                vTaskDelay(pdMS_TO_TICKS(1000));
-                current_state = STATE_MOVE_BAND;
+                // Timer nur starten wenn er nicht schon läuft!
+                if (xTimerIsTimerActive(metal_detected_timer) == pdFALSE && !metal_timer_expired)
+                    xTimerStart(metal_detected_timer, 0);
                 break;
 
             case STATE_CHECK_BOXCOUNT:
@@ -174,8 +210,9 @@ static void main_fsm_task(void *arg)
                 led_control_set_mode(LED_MODE_BLINK_SLOW);
                 bdc_driver_set_pwm(1.0f);
                 servo_control_set_angle(SERVO_ANGLE_CLEAR);
-                vTaskDelay(pdMS_TO_TICKS(1500));
-                current_state = STATE_IDLE;
+                // Timer nur starten wenn er nicht schon läuft!
+                if (xTimerIsTimerActive(wait_for_clear_timer) == pdFALSE && !clear_timer_expired)
+                    xTimerStart(wait_for_clear_timer, 0);
                 break;
 
             case STATE_RESET_BOXCOUNT:
@@ -209,11 +246,31 @@ static void main_fsm_task(void *arg)
 
 esp_err_t main_fsm_init(void)
 {
-    // Crate FSM Task
+    // Timer erstellen
+    metal_detected_timer = xTimerCreate(
+        "metal_timer",
+        pdMS_TO_TICKS(1000),
+        pdFALSE, // kein auto-repeat
+        NULL,
+        metal_detected_timer_callback);
+
+    wait_for_clear_timer = xTimerCreate(
+        "clear_timer",
+        pdMS_TO_TICKS(1500),
+        pdFALSE,
+        NULL,
+        wait_for_clear_timer_callback);
+
+    if (metal_detected_timer == NULL || wait_for_clear_timer == NULL)
+    {
+        ESP_LOGE(TAG, "Failed to create timers");
+        return ESP_FAIL;
+    }
+
+    // Task erstellen
     BaseType_t ret = xTaskCreate(main_fsm_task, "main_fsm_task",
                                  4096, NULL,
-                                 5, NULL); // Priorität anpassen, falls nötig
-
+                                 5, NULL);
     if (ret != pdPASS)
     {
         ESP_LOGE(TAG, "Failed to create Main FSM task");
