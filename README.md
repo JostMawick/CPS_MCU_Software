@@ -7,8 +7,6 @@ The main logic is implemented using ESP-IDF components. The main application fil
 
 ## Current Goals
 
-- Add support for an inductive sensor
-- Implement the complete FSM (Finite State Machine) logic
 - Improve documentation (generate better Doxygen output)
 - Develop more robust components (reduce issues caused by polling functions)
 - Improve debug output by using consistent logging within the components themselves
@@ -57,6 +55,7 @@ The system logic is governed by a Finite State Machine (`main_fsm.c`) with the f
 ## Build, Flash, and Monitor
 
 This project is built using the **ESP-IDF VS Code Extension**.
+A current Verion of the ESP_IDF is required on your machine.
 To build, flash, and monitor the project, simply use the ESP-IDF toolbar located at the bottom of the VS Code window:
 
 - ⚙️ **Build:** Compiles the project.
@@ -74,3 +73,4 @@ The code is documented using Doxygen. To generate the HTML documentation:
    doxygen Doxyfile
    ```
 4. Open the generated `docs/html/index.html` file in your browser to view the documentation.
+5. Open the statechart pdf under `docs/statechart/Statemachine_CPS.drawio.pdf`
