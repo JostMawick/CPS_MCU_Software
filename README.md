@@ -11,7 +11,7 @@ The main logic is implemented using ESP-IDF components. The main application fil
 - Develop more robust components (reduce issues caused by polling functions)
 - Improve debug output by using consistent logging within the components themselves
 - Make digital_inputs more fexible (not so static, more options like diffrent debounce times)
-  -FIX BDC Motor Driver. At the Moment the PID control and set_pwm cant work parrallel. I had to coment the pid control to make it work. (quick and dirty fix)
+- FIX BDC Motor Driver. At the Moment the PID control and set_pwm cant work parrallel. I had to comment the pid control to make it work. (quick and dirty fix)
 
 ## Hardware Requirements
 
