@@ -12,7 +12,7 @@
 #include "servo_control.h"
 
 static const char *TAG = "SERVO_CONTROL";
-static int current_servo_angle = 0;
+// static int current_servo_angle = 0;
 
 // Read configuration from Kconfig
 #define SERVO_MIN_PULSEWIDTH_US CONFIG_SERVO_MIN_PULSEWIDTH_US
